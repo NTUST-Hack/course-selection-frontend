@@ -3,8 +3,8 @@ import Typography from "@mui/material/Typography";
 
 const home = () => {
   return (
-    <MainLayout title="Dashboard">
-      <Typography paragraph>Welcome to Course Master.</Typography>
+    <MainLayout title="Accounts">
+      <Typography paragraph>Accounts</Typography>
     </MainLayout>
   );
 };
