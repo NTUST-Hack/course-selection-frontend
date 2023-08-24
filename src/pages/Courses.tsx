@@ -1,3 +1,4 @@
+import Box from "@mui/material/Box";
 import CoursesTable from "../components/CoursesTable";
 import MainLayout from "../layouts/MainLayout";
 

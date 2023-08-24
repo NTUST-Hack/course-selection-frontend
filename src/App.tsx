@@ -7,6 +7,7 @@ import "@fontsource/roboto/700.css";
 import Home from "./pages/Home";
 import Courses from "./pages/Courses";
 import Accounts from "./pages/Accounts";
+import CourseDetail from "./pages/CourseDetail";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/courses" element={<Courses />} />
+        <Route path="/courses/:course_id" element={<CourseDetail />} />
         <Route path="/accounts" element={<Accounts />} />
       </Routes>
     </div>

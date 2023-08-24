@@ -15,10 +15,11 @@ interface Props {
   window?: () => Window;
   children?: React.ReactNode;
   title?: string;
+  breadcrumbs?: React.ReactNode;
 }
 
 export default function ResponsiveDrawer(props: Props) {
-  const { window, children, title } = props;
+  const { window, children, title, breadcrumbs } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
@@ -97,9 +98,11 @@ export default function ResponsiveDrawer(props: Props) {
           flexGrow: 1,
           p: 3,
           width: { sm: `calc(100% - ${drawerWidth}px)` },
+          maxWidth: "100vw",
         }}
       >
         <Toolbar />
+        <Box sx={{ mb: 1 }}>{breadcrumbs}</Box>
         {children}
       </Box>
     </Box>
