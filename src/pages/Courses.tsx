@@ -1,5 +1,4 @@
-import Box from "@mui/material/Box";
-import CoursesTable from "../components/CoursesTable";
+import CoursesTable from "../components/course/CoursesTable";
 import MainLayout from "../layouts/MainLayout";
 
 const home = () => {

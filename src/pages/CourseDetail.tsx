@@ -6,7 +6,7 @@ import {
   getCourse,
   getCourseInfoCache,
   updateCourse,
-} from "../api/courses";
+} from "@/api/courses";
 import Typography from "@mui/material/Typography";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
@@ -33,7 +33,6 @@ import GrabTasks from "../components/course/overview_cards/GrabTasks";
 import CourseSpace from "../components/course/overview_cards/CourseSpace";
 import CourseInfos from "../components/course/CourseInfos";
 import Alert from "@mui/material/Alert";
-
 const CourseDetail = () => {
   const initialized = useRef(false);
 

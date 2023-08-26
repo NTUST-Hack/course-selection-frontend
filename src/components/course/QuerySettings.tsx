@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { Course } from "../../api/courses";
+import { Course } from "@/api/courses";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";

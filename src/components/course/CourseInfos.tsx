@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { CourseInfoCache } from "../../api/courses";
+import { CourseInfoCache } from "@/api/courses";
 
 interface Props {
   data?: CourseInfoCache;
