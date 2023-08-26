@@ -113,7 +113,7 @@ export default function CustomPaginationActionsTable() {
   }, [page, rowsPerPage]);
 
   const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement> | null,
+    _: React.MouseEvent<HTMLButtonElement> | null,
     newPage: number
   ) => {
     setPage(newPage);
