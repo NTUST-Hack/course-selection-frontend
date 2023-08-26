@@ -1,10 +1,10 @@
+import AccountsTable from "@/components/account/AccountsTable";
 import MainLayout from "../layouts/MainLayout";
-import Typography from "@mui/material/Typography";
 
 const home = () => {
   return (
     <MainLayout title="Accounts">
-      <Typography paragraph>Accounts</Typography>
+      <AccountsTable />
     </MainLayout>
   );
 };
