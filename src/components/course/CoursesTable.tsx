@@ -1,4 +1,6 @@
-import * as React from "react";
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Course, findCourses } from "@/api/courses";
 import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -16,7 +18,6 @@ import LastPageIcon from "@mui/icons-material/LastPage";
 import TableHead from "@mui/material/TableHead";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
-import { Course, findCourses } from "../api/courses";
 import "./CoursesTable.css";
 
 interface TablePaginationActionsProps {
@@ -90,48 +91,22 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   );
 }
 
-function createData(
-  id: number,
-  courseNo: string,
-  semster: string,
-  ntsustOnly: boolean,
-  bachelorOnly: boolean,
-  graduateOnly: boolean,
-  enabledQuery: boolean
-) {
-  return {
-    id,
-    courseNo,
-    semster,
-    ntsustOnly,
-    bachelorOnly,
-    graduateOnly,
-    enabledQuery,
-  };
-}
-
-const rows = [
-  createData(1, "CS2002302", "1121", true, true, false, true),
-  createData(2, "CS2002302", "1121", true, false, false, true),
-  createData(3, "CS2002302", "1121", false, true, false, true),
-  createData(4, "CS2002302", "1121", true, true, false, true),
-  createData(5, "CS2002302", "1121", true, true, false, true),
-  createData(6, "CS2002302", "1121", true, true, false, true),
-  createData(7, "CS2002302", "1121", true, true, false, true),
-  createData(8, "CS2002302", "1121", true, true, false, true),
-  createData(9, "CS2002302", "1121", true, true, false, true),
-  createData(10, "CS2002302", "1121", true, true, false, true),
-];
-
 export default function CustomPaginationActionsTable() {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [courses, setCourses] = React.useState<Course[]>([]);
+  const navigate = useNavigate();
 
-  React.useEffect(() => {
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [courses, setCourses] = useState<Course[]>([]);
+  const [totalCount, setTotalCount] = useState(0);
+
+  useEffect(() => {
     const fetchData = async () => {
-      const r = await findCourses(page * rowsPerPage, (page + 1) * rowsPerPage);
-      if (r.length > 0) setCourses(r);
+      const { courses, totalCount } = await findCourses(
+        page * rowsPerPage,
+        (page + 1) * rowsPerPage
+      );
+      if (courses.length > 0) setCourses(courses);
+      setTotalCount(totalCount);
     };
 
     fetchData();
@@ -168,14 +143,18 @@ export default function CustomPaginationActionsTable() {
           </TableHead>
           <TableBody>
             {courses.map((row) => (
-              <TableRow key={row.id}>
+              <TableRow
+                key={row.id}
+                hover
+                onClick={() => navigate(`./${row.id}`)}
+              >
                 <TableCell component="th" scope="row">
                   {row.id}
                 </TableCell>
                 <TableCell>{row.courseNo}</TableCell>
                 <TableCell>{row.semester}</TableCell>
                 <TableCell>
-                  {row.ntsustOnly ? <CheckIcon /> : <CloseIcon />}
+                  {row.ntustOnly ? <CheckIcon /> : <CloseIcon />}
                 </TableCell>
                 <TableCell>
                   {row.bachelorOnly ? <CheckIcon /> : <CloseIcon />}
@@ -194,7 +173,7 @@ export default function CustomPaginationActionsTable() {
               <TablePagination
                 rowsPerPageOptions={[1, 5, 10, 25, 50, 100]}
                 colSpan={7}
-                count={rows.length}
+                count={totalCount}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 SelectProps={{

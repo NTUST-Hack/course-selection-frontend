@@ -47,7 +47,15 @@ export const findCourses = async (
 
   const courses: Course[] = await JSON.parse(text);
 
-  return courses;
+  const totalCountHeader = r.headers.get("X-Total-Count");
+  console.log(r.headers.entries());
+  const totalCount = totalCountHeader ? parseInt(totalCountHeader) : 0;
+
+  return {
+    courses,
+    totalCount,
+    r,
+  };
 };
 
 // =========================
