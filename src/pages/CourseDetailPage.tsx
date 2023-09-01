@@ -103,7 +103,7 @@ const CourseDetailPage = () => {
         </Grid>
       </Box>
       <Grid container spacing={2} sx={{ mb: 2 }}>
-        <Grid item md={12} lg={6}>
+        <Grid item xs={12} lg={6}>
           <Paper>
             <Box sx={{ p: 2 }}>
               <Typography
@@ -132,7 +132,7 @@ const CourseDetailPage = () => {
             </Box>
           </Paper>
         </Grid>
-        <Grid item md={12} lg={6}>
+        <Grid item xs={12} lg={6}>
           <Paper>
             <Box sx={{ p: 2 }}>
               <Typography
