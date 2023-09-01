@@ -52,14 +52,7 @@ const CourseInfos = ({ data }: Props) => {
     ));
   };
 
-  return (
-    <>
-      <Typography component="h2" variant="h6" gutterBottom sx={{ mb: 2 }}>
-        Informations
-      </Typography>
-      <Box>{renderInfos()}</Box>
-    </>
-  );
+  return <Box>{renderInfos()}</Box>;
 };
 
 export default CourseInfos;

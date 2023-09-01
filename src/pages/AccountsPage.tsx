@@ -53,6 +53,7 @@ const AccountsPage = () => {
         onViewClick={handleViewAccountClick}
         onDeleteClick={handleDelAccountClick}
       />
+
       <Box sx={{ position: "fixed", bottom: "20px", right: "20px" }}>
         <Fab variant="extended" onClick={() => setNewAccountDialogOpen(true)}>
           <Add sx={{ mr: 1 }} />
@@ -69,6 +70,7 @@ const AccountsPage = () => {
       <DeleteAccountDialog
         open={delAccountDialogOpen}
         accountID={delAccountID}
+        onCancelClick={() => setDelAccountDialogOpen(false)}
         onDeleteClick={handleDelAccount}
       />
     </MainLayout>

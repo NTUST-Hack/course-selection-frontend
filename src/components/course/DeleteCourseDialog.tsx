@@ -10,14 +10,14 @@ import { red } from "@mui/material/colors";
 
 interface Props {
   open: boolean;
-  accountID: number;
+  courseID: number;
   onCancelClick?: () => void;
   onDeleteClick?: () => void;
 }
 
-const DeleteAccountDialog = ({
+const DeleteCourseDialog = ({
   open,
-  accountID,
+  courseID,
   onCancelClick,
   onDeleteClick,
 }: Props) => {
@@ -31,7 +31,7 @@ const DeleteAccountDialog = ({
       aria-describedby="alert-dialog-description"
     >
       <DialogTitle id="alert-dialog-title">
-        Do you really want to delete account {accountID}?
+        Do you really want to delete course {courseID}?
       </DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
@@ -48,4 +48,4 @@ const DeleteAccountDialog = ({
   );
 };
 
-export default DeleteAccountDialog;
+export default DeleteCourseDialog;

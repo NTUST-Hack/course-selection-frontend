@@ -1,20 +1,21 @@
 import { useState } from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableFooter from "@mui/material/TableFooter";
-import TablePagination from "@mui/material/TablePagination";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import TableHead from "@mui/material/TableHead";
-import CheckIcon from "@mui/icons-material/Check";
-import CloseIcon from "@mui/icons-material/Close";
+import { useQueryAccounts } from "@/query/accounts";
+import {
+  Box,
+  IconButton,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableFooter,
+  TableHead,
+  TablePagination,
+  TableRow,
+} from "@mui/material";
+import { Check, Close, Delete, Visibility } from "@mui/icons-material";
 import SecretHider from "./SecretHider";
 import TablePaginationActions from "@mui/material/TablePagination/TablePaginationActions";
-import { useQueryAccounts } from "@/query/accounts";
-import { IconButton } from "@mui/material";
-import { Delete, Visibility } from "@mui/icons-material";
 
 interface Props {
   onViewClick?: (id: number) => void;
@@ -72,22 +73,22 @@ const AccountsTable = ({ onViewClick, onDeleteClick }: Props) => {
                 <TableCell>
                   <SecretHider>{row.secret}</SecretHider>
                 </TableCell>
-                <TableCell>
-                  {row.autoLogin ? <CheckIcon /> : <CloseIcon />}
-                </TableCell>
+                <TableCell>{row.autoLogin ? <Check /> : <Close />}</TableCell>
                 <TableCell align="right">
-                  <IconButton
-                    aria-label="view"
-                    onClick={() => handleViewClick(row.id!)}
-                  >
-                    <Visibility />
-                  </IconButton>
-                  <IconButton
-                    aria-label="delete"
-                    onClick={() => handleDeleteClick(row.id!)}
-                  >
-                    <Delete />
-                  </IconButton>
+                  <Box sx={{ whiteSpace: "nowrap" }}>
+                    <IconButton
+                      aria-label="view"
+                      onClick={() => handleViewClick(row.id!)}
+                    >
+                      <Visibility />
+                    </IconButton>
+                    <IconButton
+                      aria-label="delete"
+                      onClick={() => handleDeleteClick(row.id!)}
+                    >
+                      <Delete />
+                    </IconButton>
+                  </Box>
                 </TableCell>
               </TableRow>
             ))}

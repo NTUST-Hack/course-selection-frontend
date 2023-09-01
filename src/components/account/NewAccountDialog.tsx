@@ -42,7 +42,9 @@ const NewAccountDialog = ({ open, onCancelClick, onSubmitClick }: Props) => {
       </DialogContent>
       <DialogActions>
         <Button onClick={handleCancelClick}>Cancel</Button>
-        <Button onClick={handleSubmitClick}>Add</Button>
+        <Button autoFocus onClick={handleSubmitClick}>
+          Add
+        </Button>
       </DialogActions>
     </Dialog>
   );

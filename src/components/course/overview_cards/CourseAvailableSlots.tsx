@@ -6,7 +6,7 @@ interface Props {
   maximumNumber?: number;
 }
 
-const CourseSpace = ({ chosenNumber, maximumNumber }: Props) => {
+const CourseAvailableSlots = ({ chosenNumber, maximumNumber }: Props) => {
   return (
     <Paper
       sx={{
@@ -16,7 +16,7 @@ const CourseSpace = ({ chosenNumber, maximumNumber }: Props) => {
       }}
     >
       <Typography component="h2" variant="h6" color="primary" gutterBottom>
-        Spcae
+        Available Slots
       </Typography>
       <Typography component="p" variant="h4">
         {chosenNumber ? chosenNumber : 0}
@@ -29,4 +29,4 @@ const CourseSpace = ({ chosenNumber, maximumNumber }: Props) => {
   );
 };
 
-export default CourseSpace;
+export default CourseAvailableSlots;

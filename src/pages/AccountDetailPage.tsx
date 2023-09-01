@@ -70,10 +70,7 @@ const AccountDetailPage = () => {
     <MainLayout title="Account Detail" breadcrumbs={breadcrumbs}>
       {isError && (
         <Box sx={{ mb: 2 }}>
-          <Alert severity="error">
-            Failed to fetch data:&nbsp
-            {typeof error === "object" ? error?.toString() : "unknown"}
-          </Alert>
+          <Alert severity="error">Failed to fetch data: {String(error)}</Alert>
         </Box>
       )}
       <Grid container spacing={2} sx={{ mb: 2 }}>
