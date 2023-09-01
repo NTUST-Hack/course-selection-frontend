@@ -4,23 +4,26 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-import Home from "./pages/Home";
-import Courses from "./pages/Courses";
-import Accounts from "./pages/Accounts";
-import CourseDetail from "./pages/CourseDetail";
-import AccountDetail from "./pages/AccountDetail";
+import HomePage from "./pages/HomePage";
+import CoursesPage from "./pages/CoursesPage";
+import AccountsPage from "./pages/AccountsPage";
+import CourseDetailPage from "./pages/CourseDetailPage";
+import AccountDetailPage from "./pages/AccountDetailPage";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
-    <div className="App">
+    <QueryClientProvider client={queryClient}>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/courses" element={<Courses />} />
-        <Route path="/courses/:course_id" element={<CourseDetail />} />
-        <Route path="/accounts" element={<Accounts />} />
-        <Route path="/accounts/:account_id" element={<AccountDetail />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/courses" element={<CoursesPage />} />
+        <Route path="/courses/:course_id" element={<CourseDetailPage />} />
+        <Route path="/accounts" element={<AccountsPage />} />
+        <Route path="/accounts/:account_id" element={<AccountDetailPage />} />
       </Routes>
-    </div>
+    </QueryClientProvider>
   );
 }
 

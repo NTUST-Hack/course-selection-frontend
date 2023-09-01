@@ -9,9 +9,9 @@ export interface Account {
   autoLogin: boolean;
 }
 
-const getInfoCachePath = (id: number): string => {
-  return `${ACCOUNTS_PATH}/${id}/info_cache`;
-};
+// const getInfoCachePath = (id: number): string => {
+//   return `${ACCOUNTS_PATH}/${id}/info_cache`;
+// };
 
 export const findAccounts = async (
   offset: number,

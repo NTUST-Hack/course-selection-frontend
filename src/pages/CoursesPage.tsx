@@ -1,7 +1,7 @@
 import CoursesTable from "../components/course/CoursesTable";
 import MainLayout from "../layouts/MainLayout";
 
-const home = () => {
+const CoursePage = () => {
   return (
     <MainLayout title="Courses">
       <CoursesTable />
@@ -9,4 +9,4 @@ const home = () => {
   );
 };
 
-export default home;
+export default CoursePage;
