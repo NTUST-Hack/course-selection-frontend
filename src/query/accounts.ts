@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { API_URL } from "./api";
+import axios from "axios";
 
 const NTUST_ACCOUNTS_PATH: string = "/ntust_accounts";
 

@@ -16,6 +16,7 @@ interface Props {
 const AccountSettings = ({ value, onChange }: Props) => {
   const [accountSettings, setAccountSettings] = useState<Account>({
     account: "",
+    password: "",
     secret: "",
     autoLogin: false,
   });
@@ -34,6 +35,7 @@ const AccountSettings = ({ value, onChange }: Props) => {
           fullWidth
           id="account"
           label="Account"
+          autoComplete="off"
           value={accountSettings.account}
           onChange={(e) =>
             handleChange({
@@ -49,6 +51,7 @@ const AccountSettings = ({ value, onChange }: Props) => {
           id="password"
           label="Password"
           type="password"
+          autoComplete="off"
           value={accountSettings.password}
           onChange={(e) =>
             handleChange({
@@ -63,6 +66,7 @@ const AccountSettings = ({ value, onChange }: Props) => {
           fullWidth
           id="secret"
           label="NTUST Secret"
+          autoComplete="off"
           value={accountSettings.secret}
           onChange={(e) =>
             handleChange({

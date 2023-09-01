@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useQueryClient } from "@tanstack/react-query";
 import { Account, useCreateAccount, useDeleteAccount } from "@/query/accounts";
 import { Box, Fab } from "@mui/material";
 import { Add } from "@mui/icons-material";
@@ -10,6 +11,7 @@ import DeleteAccountDialog from "@/components/account/DeleteAccountDialog";
 
 const AccountsPage = () => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const [newAccountDialogOpen, setNewAccountDialogOpen] = useState(false);
   const [delAccountDialogOpen, setDelAccountDialogOpen] = useState(false);
@@ -20,13 +22,19 @@ const AccountsPage = () => {
 
   const handleAddAccount = (value: Account) => {
     createAccount.mutate(value, {
-      onSuccess: () => setNewAccountDialogOpen(false),
+      onSuccess: () => {
+        queryClient.refetchQueries(["accounts"]);
+        setNewAccountDialogOpen(false);
+      },
     });
   };
 
   const handleDelAccount = () => {
     deleteAccount.mutate(delAccountID, {
-      onSuccess: () => setDelAccountDialogOpen(false),
+      onSuccess: () => {
+        queryClient.refetchQueries(["accounts"]);
+        setDelAccountDialogOpen(false);
+      },
     });
   };
 
