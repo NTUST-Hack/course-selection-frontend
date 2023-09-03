@@ -5,6 +5,7 @@ import {
   useUpdateAccount,
   useQueryAccount,
   useQueryAccountInfoCache,
+  useQueryAccountChosenCourses,
 } from "@/query/accounts";
 import {
   Typography,
@@ -19,6 +20,7 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import AccountSettings from "@/components/account/AccountSettings";
+import ChosenCoursesTable from "@/components/account/ChosenCoursesTable";
 
 const AccountDetailPage = () => {
   const { account_id } = useParams();
@@ -27,6 +29,7 @@ const AccountDetailPage = () => {
   const { data: accountData, isError, error } = useQueryAccount(id);
 
   const { data: accountInfoData } = useQueryAccountInfoCache(id, 1000);
+  const { data: chosenCoursesData } = useQueryAccountChosenCourses(id);
 
   const accountUpdate = useUpdateAccount(id);
 
@@ -132,18 +135,7 @@ const AccountDetailPage = () => {
           </Paper>
         </Grid>
         <Grid item xs={12}>
-          <Paper>
-            <Box sx={{ p: 2 }}>
-              <Typography
-                component="h2"
-                variant="h6"
-                gutterBottom
-                sx={{ mb: 2 }}
-              >
-                Chosen Courses
-              </Typography>
-            </Box>
-          </Paper>
+          <ChosenCoursesTable data={chosenCoursesData} />
         </Grid>
       </Grid>
     </MainLayout>

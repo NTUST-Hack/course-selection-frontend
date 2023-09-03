@@ -20,12 +20,25 @@ export interface AccountInfoCache {
   lastUpdated: Date;
 }
 
+export interface AccountChosenCourse {
+  courseNo: string;
+  courseName: string;
+  creditPoint: string;
+  requireOption: string;
+  teacher: string;
+  notes: string;
+}
+
 const getAccountPath = (id: number): string => {
   return `${NTUST_ACCOUNTS_PATH}/${id}`;
 };
 
 const getAccountInfoCachePath = (id: number): string => {
   return `${getAccountPath(id)}/info_cache`;
+};
+
+const getAccountChosenCoursesPath = (id: number): string => {
+  return `${getAccountPath(id)}/chosen_courses`;
 };
 
 export const queryAccountFn = async (id: number) => {
@@ -104,5 +117,17 @@ export const useQueryAccountInfoCache = (
       return data;
     },
     refetchInterval: refetchInterval,
+  });
+};
+
+export const useQueryAccountChosenCourses = (id: number) => {
+  return useQuery({
+    queryKey: ["account_chosen_courses", id],
+    queryFn: async () => {
+      const { data } = await axios.get<AccountChosenCourse[]>(
+        API_URL + getAccountChosenCoursesPath(id)
+      );
+      return data;
+    },
   });
 };
