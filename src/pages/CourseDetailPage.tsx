@@ -9,9 +9,6 @@ import {
   Grid,
   IconButton,
   Link,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
   Paper,
   Stack,
   Typography,
@@ -22,12 +19,27 @@ import QuerySpeed from "@/components/course/overview_cards/QuerySpeed";
 import GrabTasks from "@/components/course/overview_cards/GrabTasks";
 import QuerySettings from "@/components/course/QuerySettings";
 import CourseInfos from "@/components/course/CourseInfos";
-import { Add, ExpandMore, PlayArrow, Stop } from "@mui/icons-material";
+import { Add } from "@mui/icons-material";
 import { useQueryCourse, useQueryCourseInfoCache } from "@/query/courses";
 import CourseAvailableSlots from "@/components/course/overview_cards/CourseAvailableSlots";
+import GrabTaskInformations from "@/components/course/grab_tasks/GrabTaskInformations";
+import {
+  GrabTask,
+  useCreateGrabTask,
+  useQueryGrabTasks,
+} from "@/query/grabTasks";
+import NewGrabTaskDialog from "@/components/course/grab_tasks/NewGrabTaskDialog";
+import { useQueryClient } from "@tanstack/react-query";
 
 const CourseDetailPage = () => {
+  const queryClient = useQueryClient();
+
   const { course_id } = useParams();
+  const id = parseInt(course_id!);
+
+  const [newTaskDialogOpen, setNewTaskDialogOpen] = useState(false);
+
+  const { data: grabTasksData } = useQueryGrabTasks(id, 0, 100);
 
   const [querySettings, setQuerySettings] = useState<Course>({
     courseNo: "",
@@ -50,6 +62,8 @@ const CourseDetailPage = () => {
     1000
   );
 
+  const createGrabTask = useCreateGrabTask(id);
+
   useEffect(() => {
     querySettingsData && setQuerySettings(querySettingsData);
   }, [querySettingsData]);
@@ -63,6 +77,15 @@ const CourseDetailPage = () => {
       const course = await updateCourse(parseInt(course_id), querySettings);
       setQuerySettings(course);
     }
+  };
+
+  const handleCreateGrabTask = (value: GrabTask) => {
+    createGrabTask.mutate(value, {
+      onSuccess: () => {
+        setNewTaskDialogOpen(false);
+        queryClient.refetchQueries(["grab_tasks"]);
+      },
+    });
   };
 
   const breadcrumbs = (
@@ -148,34 +171,33 @@ const CourseDetailPage = () => {
           </Paper>
         </Grid>
       </Grid>
-      <Paper sx={{ mb: 2 }}>
-        <Box sx={{ p: 2 }}>
-          <Stack direction="row" justifyContent="space-between" sx={{ mb: 2 }}>
-            <Typography component="h2" variant="h6" gutterBottom>
-              Grab Tasks
-            </Typography>
-            <IconButton aria-label="new-grab-task">
-              <Add />
-            </IconButton>
-          </Stack>
+      <Box>
+        <Stack direction="row" justifyContent="space-between">
+          <Typography component="h2" variant="h6" gutterBottom>
+            Grab Tasks
+          </Typography>
+          <IconButton
+            aria-label="new-grab-task"
+            onClick={() => setNewTaskDialogOpen(true)}
+          >
+            <Add />
+          </IconButton>
+        </Stack>
 
-          <ListItemButton>
-            <ListItemIcon>
-              <PlayArrow />
-            </ListItemIcon>
-            <ListItemText primary="1 (B11030202)" />
-            <ExpandMore />
-          </ListItemButton>
+        <Grid container spacing={2}>
+          {grabTasksData?.data?.map((task) => (
+            <Grid item xs={12} lg={6} key={`grab_task_${task.id}`}>
+              <GrabTaskInformations courseID={id} taskID={task.id!} />
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
 
-          <ListItemButton>
-            <ListItemIcon>
-              <Stop />
-            </ListItemIcon>
-            <ListItemText primary="2 (B11030203)" />
-            <ExpandMore />
-          </ListItemButton>
-        </Box>
-      </Paper>
+      <NewGrabTaskDialog
+        open={newTaskDialogOpen}
+        onCancelClick={() => setNewTaskDialogOpen(false)}
+        onSubmitClick={handleCreateGrabTask}
+      />
     </MainLayout>
   );
 };

@@ -2,7 +2,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { API_URL } from "./api";
 import axios from "axios";
 
-const COURSES_PATH: string = "/courses";
+export const COURSES_PATH: string = "/courses";
 
 export interface Course {
   id?: number;

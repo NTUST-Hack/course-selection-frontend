@@ -28,6 +28,11 @@ const getAccountInfoCachePath = (id: number): string => {
   return `${getAccountPath(id)}/info_cache`;
 };
 
+export const queryAccountFn = async (id: number) => {
+  const { data } = await axios.get<Account>(API_URL + getAccountPath(id));
+  return data;
+};
+
 export const useQueryAccounts = (
   offset: number,
   limit: number,
@@ -58,10 +63,7 @@ export const useQueryAccounts = (
 export const useQueryAccount = (id: number) => {
   return useQuery({
     queryKey: ["account", id],
-    queryFn: async () => {
-      const { data } = await axios.get<Account>(API_URL + getAccountPath(id));
-      return data;
-    },
+    queryFn: () => queryAccountFn(id),
   });
 };
 

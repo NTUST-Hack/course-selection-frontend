@@ -1,0 +1,17 @@
+.breathing {
+  animation: breathing 1.5s ease infinite normal;
+}
+
+@keyframes breathing {
+  0% {
+    opacity: 0.4;
+  }
+  
+  50% {
+    opacity: 1;
+  }
+  
+  100% {
+    opacity: 0.4;
+  }
+}
